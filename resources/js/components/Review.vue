@@ -69,7 +69,6 @@ export default {
         validateAddress() {
             // Regular expression pattern for a simple address format
             const addressPattern = /^[0-9]+(\s[A-Za-z0-9'-]+)+,\s[A-Za-z]+,\s[A-Za-z]+\s[0-9]+$/;
-            console.log("test");
             // Check if the input address matches the expected pattern
             if (addressPattern.test(this.feedback.address)) {
                 this.addressValid = true;

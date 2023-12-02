@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 //
 Route::apiResource('feedback', FeedbackController::class);
 
+Route::post('/feedback/upload', [FeedbackController::class, 'uploadFromFile']);
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
