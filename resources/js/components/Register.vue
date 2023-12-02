@@ -1,7 +1,11 @@
 <template>
     <div>
-        <h1> Login </h1>
-        <form method="post" @submit.prevent="handleLogin">
+        <h1> Create Account </h1>
+        <form method="post" @submit.prevent="handleRegister">
+            <div class="form-group">
+                <p>Name:</p>
+                <input type="text" v-model="form.name" required/>
+            </div>
             <div class="form-group">
                 <p>Email Address:</p>
                 <input type="text" v-model="form.email" required/>
@@ -10,9 +14,17 @@
                 <p>Password:</p>
                 <input type="password" v-model="form.password" required/>
             </div>
+            <div class="form-group">
+                <p>Role:</p>
+                <select v-model="form.role" required>
+                    <option disabled value="">Please select one</option>
+                    <option>admin</option>
+                    <option>user</option>
+                </select>
+            </div>
             <div>
-                <button type="submit">Sign In</button>
-                <router-link to="/register">Sign Up</router-link>
+                <button type="submit">Register</button>
+                <router-link to="/login">Login</router-link>
             </div>
         </form>
     </div>
@@ -26,16 +38,17 @@ export default {
         const errors = ref()
         const router = useRouter();
         const form = reactive({
+            name: '',
             email: '',
             password: '',
+            role: '',
         })
-        const handleLogin = async () => {
+        const handleRegister = async () => {
             try {
-                await axios.get('/api/users');
-                const result = await axios.post('/api/auth/login', form);
+                const result = await axios.post('/api/auth/register', form)
                 if (result.status === 200 && result.data && result.data.token) {
                     localStorage.setItem('APP_DEMO_USER_TOKEN', result.data.token)
-                    await router.push('manualimport')
+                    await router.push('home')
                 }
             } catch (e) {
                 if(e && e.response.data && e.response.data.errors) {
@@ -49,8 +62,9 @@ export default {
         return {
             form,
             errors,
-            handleLogin,
+            handleRegister,
         }
     }
 }
 </script>
+

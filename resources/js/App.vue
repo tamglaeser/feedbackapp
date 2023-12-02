@@ -25,10 +25,4 @@ a:hover,
 a.router-link-active {
     background-color: rgb(63, 77, 248);
 }
-div {
-    border: dashed black 1px;
-    padding: 20px;
-    margin: 10px;
-    display: inline-block;
-}
 </style>
