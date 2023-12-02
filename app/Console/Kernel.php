@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\ProcessCSVFile::class,
+        Commands\ExportFeedbackJson::class,
     ];
 
     /**
@@ -22,6 +23,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         $schedule->command('csv:process')->hourly();
+        $schedule->command('export:feedback')->weekly()->fridays()->at('15:00');
     }
 
     /**
