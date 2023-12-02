@@ -84,7 +84,6 @@ export default {
                 this.feedback.start_date = new Date(this.feedback.start_date).toISOString();
 
                 const response = await axios.post('/api/feedback', this.feedback);
-                //const secresp = await axios.get('/api/feedback');
 
                 if (response.status === 201) {
                     this.feedbackSubmitted = true;

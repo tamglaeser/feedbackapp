@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('appartments');
             $table->string('source');
             $table->timestamps();
+
+            $table->unique(['review', 'rating', 'start_date', 'address', 'appartments', 'source']);
         });
     }
 
