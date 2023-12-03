@@ -3,9 +3,6 @@
 namespace App\Services;
 
 use App\Models\Feedback;
-use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Log;
-use Mockery\Exception;
 
 class FileProcessingService
 {

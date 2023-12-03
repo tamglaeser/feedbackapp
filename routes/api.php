@@ -20,6 +20,7 @@ Route::apiResource('feedback', FeedbackController::class);
 Route::post('/feedback/upload', [FeedbackController::class, 'uploadFromFile']);
 
 Route::apiResource('users', AuthController::class);
+Route::delete('/users/{id}', [AuthController::class, 'destroy']);
 Route::post('/auth/register', [AuthController::class, 'register']);
 Route::post('/auth/login', [AuthController::class, 'login']);
 

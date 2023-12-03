@@ -16,6 +16,22 @@ class AuthController extends Controller
         return response()->json(['status' => true, 'data' => $data], 201);
     }
 
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return response()->json(['message' => 'User not found'], 404);
+        }
+
+        /*if ($user->id !== auth()->user()->id) {
+            return response()->json(['message' => 'Unauthorized'], 401);
+        }*/
+
+        $user->delete();
+
+        return response()->json(['message' => 'User deleted successfully']);
+    }
+
     public function register(Request $request): JsonResponse
     {
         // Validate incoming request
@@ -47,7 +63,7 @@ class AuthController extends Controller
             $user = Auth::user(); // Retrieve the authenticated user
             $token = $user->createToken('AuthToken')->plainTextToken;
 
-            return response()->json(['token' => $token]);
+            return response()->json(['userId' => $user->getAuthIdentifier(), 'token' => $token]);
         } else {
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
