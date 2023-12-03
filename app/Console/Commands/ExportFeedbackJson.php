@@ -41,11 +41,6 @@ class ExportFeedbackJson extends Command
         file_put_contents($filePath, $json);
 
         foreach ($admins as $admin) {
-            Mail::raw('Email content', function ($message) use ($admin, $filePath) {
-                $message->to($admin->email)
-                    ->subject('Feedback JSON')
-                    ->attach($filePath);
-            });
             Mail::to($admin->email)->send(new FeedbackExportMail($filePath));
         }
 

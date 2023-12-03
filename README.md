@@ -1,66 +1,135 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Feedback App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project implements a feedback application allowing the user to
+1. Import a CSV file containing feedback from Feedier on an hourly basis through a CRON job
+2. Create a feedback entry through a form
+3. Export all feedback as a JSON file and send it to all the admin users every Friday at 3pm, through a CRON job
+4. Import feedback manually with a JSON or CSV file if logged in
 
-## About Laravel
+## Getting Started
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Installation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Clone the repository:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    ```bash
+    git clone git@github.com:tamglaeser/feedbackapp.git
+    ```
 
-## Learning Laravel
+2. Navigate to the project directory:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+    ```bash
+    cd feedbackapp
+    ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+3. Install PHP dependencies:
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    ```bash
+    composer install
+    ```
 
-## Laravel Sponsors
+4. Install Node.js dependencies:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    ```bash
+    npm install
+    ```
 
-### Premium Partners
+5. Generate application key:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    ```bash
+    php artisan key:generate
+    ```
 
-## Contributing
+6. Compile assets:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    ```bash
+    npm run dev
+    ```
 
-## Code of Conduct
+### Usage
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+To start the development server, run:
 
-## Security Vulnerabilities
+```bash
+php artisan serve
+```
+ You can now open http://localhost:8000 to see the application.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Project Structure
+````bash
+feedbackapp/
+│
+├── app/               # Contains core application code (controllers, models, etc.)
+│   ├── Console/       # Artisan console commands
+│   │   ├── Commands/  # Contains implementation of my two CRON commands
+│   │   ├── Kernel.php # Contains scheduler of CRON commands
+│   ├── Exceptions/    # Exception handling
+│   ├── Http/          # Controllers, middleware, requests
+│   ├── Mail/          # Mailables
+│   ├── Models/        # ie. Feedback, User
+│   ├── Providers/     # Service providers
+│   └── Services/      
+│
+├── bootstrap/         # Bootstrapping and application startup
+│   └── ...            # Framework initialization files
+│
+├── config/            # Configuration files for various application components
+│   └── ...            # Files such as database, services, app settings, etc.
+│
+├── database/          # Database-related files
+│   ├── migrations/    # Database migration files to create / modify tables
+│   └── seeds/         # Database seeders
+│
+├── public/            # Publicly accessible files served by the webserver
+│   └── ...            # Assets, index.php, etc.
+│
+├── resources/         # Views, language files, and frontend assets
+│   ├── js/            # Vue components, app.js
+│   ├── views/         # Blade templates/views
+│   └── ...            # Other assets, such as CSS
+│
+├── routes/            # Route definitions for the application
+│   └── ...            # Web.php, API.php, etc.
+│
+├── storage/           # Storage for logs, file uploads, and other temporary files
+│   ├── app/           # Files generated by the application
+│   ├── framework/     # Framework-generated files
+│   └── ...            # Other storage-related items
+│
+├── .env               # Environment-specific configuration file
+├── .gitignore         # Files and directories ignored by version control
+├── artisan            # Laravel's command-line interface executable
+├── composer.json      # Defines PHP dependencies for the Laravel application
+├── package.json       # Node.js dependencies and scripts (if present)
+└── ...                # Other project-related files and folders
 
-## License
+````
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Database
+
+Using SQLite as my database; find under `database/database.sqlite`. See configurations within the `.env` file.
+
+## Mail
+Using [Mailtrap](https://mailtrap.io/) as "dummy" mailbox to test my email sending. Configurations can be found in `.env` file; modify the host,
+username, password, and other configurations to set up with your own Mailtrap account. Will then be able to see the sent
+emails in your Mailtrap inbox, including the To and From addresses, content, and attachments.
+
+## CRON Jobs
+
+To set up CRON to call the Laravel command scheduler every minute, running the commands when scheduled, execute
+````bash
+php artisan schedule:run >> /dev/null 2>&1
+````
+This will ensure steps 1 and 3 of this application are processed, importing feedback data from Feedier every hour and
+sending feedback data to admin users every Friday at 3pm.
+
+To see all available commands provided by Artisan, execute
+````bash
+php artisan list
+````
+
+The two schedule CRON jobs can be found here as commands:
+````bash
+php artisan csv:process  # Import Feedier CSV file
+php artisan export:feedback  # Export feedback as JSON and send it to admin users
+````

@@ -20,7 +20,7 @@ class ProcessCSVFile extends Command
      *
      * @var string
      */
-    protected $description = 'Process Feedier CSV file';
+    protected $description = 'Import Feedier CSV file';
     protected $fileService;
 
     public function __construct(FileProcessingService $fileService)

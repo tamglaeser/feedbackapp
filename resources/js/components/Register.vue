@@ -34,6 +34,7 @@
 <script>
 import {reactive, ref} from "vue";
 import {useRouter} from "vue-router";
+import axios from "axios";
 
 export default {
     setup() {
@@ -48,9 +49,8 @@ export default {
         const handleRegister = async () => {
             try {
                 const result = await axios.post('/api/auth/register', form)
-                if (result.status === 200 && result.data && result.data.token) {
-                    localStorage.setItem('APP_DEMO_USER_TOKEN', result.data.token)
-                    await router.push('home')
+                if (result.status === 200) {
+                    await router.push('/')
                 }
             } catch (e) {
                 if(e && e.response.data && e.response.data.errors) {
