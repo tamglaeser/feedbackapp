@@ -1,46 +1,53 @@
 <template>
-    <form method="post" @submit.prevent="submitFeedback">
-        <div class="form-group">
-            <p>Review:</p>
-            <textarea v-model="feedback.review" placeholder="What is your feedback?" required></textarea>
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center">
+            <h2 class="mb-4"> Complete your review </h2>
+            <form method="post" @submit.prevent="submitFeedback">
+                <div class="mb-3">
+                    <label for="review" class="form-label">Review:</label>
+                    <textarea class="form-control" id="review" v-model="feedback.review" placeholder="What is your feedback?" required></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="rating" class="form-label">Rating:</label>
+                    <input type="number" class="form-control" id="rating" v-model="feedback.rating" min="1" max="10" required>
+                </div>
+                <div class="mb-3">
+                    <label for="start_date" class="form-label">Start Date:</label>
+                    <input type="date" class="form-control" id="start_date" v-model="feedback.start_date" :max="maxDate" required>
+                </div>
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address:</label>
+                    <input type="text" class="form-control" id="address" v-model="feedback.address" required>
+                </div>
+                <div class="mb-3">
+                    <label for="appartments" class="form-label">Appartments:</label>
+                    <select class="form-control" id="appartments" v-model="feedback.appartments" required>
+                        <option disabled value="">Please select one</option>
+                        <option>Solstice Apartments</option>
+                        <option>Kings Dock Mill Liverpool</option>
+                        <option>Windlass Apartments</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="source" class="form-label">Source:</label>
+                    <select class="form-control" id="source" v-model="feedback.source" required>
+                        <option disabled value="">Please select one</option>
+                        <option>allAgents</option>
+                        <option>Google</option>
+                        <option>Truspilot</option>
+                    </select>
+                </div>
+                <div class="mb-3 text-center">
+                    <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                </div>
+            </form>
+            <div v-if="!addressValid">  <!--Need to improve validateFunction-->
+                Address format is invalid.
+            </div>
+            <div v-if="feedbackSubmitted" class="success-message">
+                Thank you for your feedback!
+            </div>
         </div>
-        <div class="form-group">
-            <p>Rating:</p>
-            <input v-model="feedback.rating" type="number" min="1" max="10" required>
-        </div>
-        <div class="form-group">
-            <p>Start Date:</p>
-            <input v-model="feedback.start_date" type="date" :max="maxDate" required>  <!--YYYY-MM-DD HH:mm:ss, YYYY/MM/DD-->
-        </div>
-        <div class="form-group">
-            <p>Address:</p>
-            <input v-model="feedback.address" required>
-        </div>
-        <div class="form-group">
-            <p>Appartments:</p>
-            <select v-model="feedback.appartments" required>
-                <option disabled value="">Please select one</option>
-                <option>Solstice Apartments</option>
-                <option>Kings Dock Mill Liverpool</option>
-                <option>Windlass Apartments</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <p>Source:</p>
-            <select v-model="feedback.source" required>
-                <option disabled value="">Please select one</option>
-                <option>allAgents</option>
-                <option>Google</option>
-                <option>Truspilot</option>
-            </select>
-        </div>
-        <button type="submit">Submit Feedback</button>
-    </form>
-    <div v-if="!addressValid">  <!--Need to improve validateFunction-->
-        Address format is invalid.
-    </div>
-    <div v-if="feedbackSubmitted" class="success-message">
-        Thank you for your feedback!
     </div>
 </template>
 <script>

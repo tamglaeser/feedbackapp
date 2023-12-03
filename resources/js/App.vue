@@ -1,28 +1,15 @@
 <template>
-    <router-link to="/review">Submit feedback</router-link>
-    <router-link to="/login">Manually import feedback</router-link>
-    <span>
+    <div id="app">
+        <TopBand />
         <router-view></router-view>
-    </span>
+    </div>
 </template>
 <script>
-export default {
-    setup() {
+import TopBand from "./components/TopBand.vue";
 
-    }
+export default {
+    components: {
+        TopBand
+    },
 }
 </script>
-<style scoped>
-a {
-    display: inline-block;
-    background-color: #1523ce;
-    border: solid 1px #1523ce;
-    color: white;
-    padding: 5px;
-    margin: 10px;
-}
-a:hover,
-a.router-link-active {
-    background-color: rgb(63, 77, 248);
-}
-</style>

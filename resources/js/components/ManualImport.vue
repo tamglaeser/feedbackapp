@@ -1,13 +1,19 @@
 <template>
-    <div>
-        <input
-            type="file"
-            @change="handleFileUpload"
-            accept=".json, .csv"
-        />
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center mb-3">
+            <h6>Please select a file (JSON or CSV) to import</h6>
+            <input
+                type="file"
+                @change="handleFileUpload"
+                accept=".json, .csv"
+                id="file"
+            />
+        </div>
     </div>
 </template>
 <script>
+import axios from "axios";
+
 export default {
     methods: {
         async handleFileUpload(event) {

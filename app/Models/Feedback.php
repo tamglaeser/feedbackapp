@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Feedback extends Model
 {
@@ -38,7 +39,7 @@ class Feedback extends Model
             }
 
             if ($existingEntry) {
-                throw new \Exception("Feedback entry already exists in database");
+                Log::error('Feedback entry already exists in database');
             }
         });
     }

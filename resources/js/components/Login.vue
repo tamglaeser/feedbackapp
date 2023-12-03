@@ -1,25 +1,28 @@
 <template>
-    <div>
-        <h1> Login </h1>
-        <form method="post" @submit.prevent="handleLogin">
-            <div class="form-group">
-                <p>Email Address:</p>
-                <input type="text" v-model="form.email" required/>
-            </div>
-            <div class="form-group">
-                <p>Password:</p>
-                <input type="password" v-model="form.password" required/>
-            </div>
-            <div>
-                <button type="submit">Sign In</button>
-                <router-link to="/register">Sign Up</router-link>
-            </div>
-        </form>
+    <div class="container-fluid d-flex justify-content-center align-items-center vh-100">
+        <div class="text-center">
+            <h2 class="mb-4"> Login </h2>
+            <form method="post" @submit.prevent="handleLogin">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email Address:</label>
+                    <input type="email" class="form-control" id="email" v-model="form.email" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input type="password" class="form-control" id="password" v-model="form.password" required/>
+                </div>
+                <div class="mb-3 text-center">
+                    <button type="submit" class="btn btn-primary">Sign In</button>
+                    <router-link to="/register" class="btn btn-secondary">Sign Up</router-link>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
 <script>
 import {reactive, ref} from "vue";
 import {useRouter} from "vue-router";
+import axios from "axios";
 
 export default {
     setup() {
