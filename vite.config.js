@@ -10,4 +10,8 @@ export default defineConfig({
             'resources/js/app.js'
         ]),
     ],
+    test: {
+        globals: true,
+        environment: "jsdom",
+    },
 });
