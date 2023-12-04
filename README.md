@@ -133,3 +133,9 @@ The two schedule CRON jobs can be found here as commands:
 php artisan csv:process  # Import Feedier CSV file
 php artisan export:feedback  # Export feedback as JSON and send it to admin users
 ````
+
+### Certificate Authority
+
+To set up my certificate for my first CRON job, importing the Feedier CSV file, and avoid an SSL error, I had to go to my 
+[Feedier Production site](https://feedier-production.s3.eu-west-1.amazonaws.com/), download the certificate as a crt 
+file, and add the path for this certificate to my php.ini `openssl.cafile` variable.

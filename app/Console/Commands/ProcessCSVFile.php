@@ -33,7 +33,7 @@ class ProcessCSVFile extends Command
      */
     public function handle()
     {
-        $url = 'http://feedier-production.s3.eu-west-1.amazonaws.com/special/Reviews+Import.csv';
+        $url = 'https://feedier-production.s3.eu-west-1.amazonaws.com/special/Reviews+Import.csv';
         // Fetch CSV file content
         $response = Http::get($url);
 
