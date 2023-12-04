@@ -176,4 +176,7 @@ Based on your understanding of Laravel Queues,
     We could also send alerts to Sentry to notify the team when a job fails multiple times or exceeds its allotted time.
 
     Finally, I would suggest modifying the queue configuration for this job, increasing the maximum allowed attempts and 
-    time before timeout to allow a longer processing window.
+    time before timeout to allow a longer processing window. Depending on the urgency of this job, this step could be 
+    implemented first so as to possibly avoid the lack of an important process, ie. if it is critical for the admin user 
+    to get the feedback JSON every Friday, we first increase the processing time / maximum allowed attempts in case this 
+    would allow the admin to get their JSON file.

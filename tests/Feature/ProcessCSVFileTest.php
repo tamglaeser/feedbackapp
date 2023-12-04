@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Feature;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
@@ -8,7 +10,8 @@ class ProcessCSVFileTest extends TestCase
 {
     use RefreshDatabase; // This trait resets the database after each test
     /** @test */
-    public function it_processes_csv_file_from_url() {
+    public function it_processes_csv_file_from_url()
+    {
         $csvContent = <<<CSV
             Reviews Content,Rating,Start Date,Address,Appartments,Source
             "The app hardly ever works. I have restarted more than 10 times, even reinstalled and still can't view the menu 😏",1,2021-08-17 00:00:00,"801 Silbury Blvd, Milton Keynes MK9 3FL, United Kingdom",Solstice Apartments,Google

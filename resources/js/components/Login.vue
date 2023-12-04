@@ -34,6 +34,8 @@ export default {
         })
         const handleLogin = async () => {
             try {
+                await axios.get('/api/users');
+                await axios.get('/api/feedback');
                 const result = await axios.post('/api/auth/login', form);
                 if (result.status === 200 && result.data && result.data.token) {
                     localStorage.setItem('APP_DEMO_USER_TOKEN', result.data.token)

@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { mount } from '@vue/test-utils';
 import Review from '../../resources/js/components/Review.vue';
 
