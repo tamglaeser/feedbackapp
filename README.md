@@ -145,3 +145,35 @@ download the latest cURL bundle of all the CAs (which includes the Amazon one), 
 as my `php.ini` `openssl.cafile` variable. In case the Amazon CA were missing from this file, I could download the 
 certificate from the [Feedier Production Site](https://feedier-production.s3.eu-west-1.amazonaws.com/) and add the CA
 to the `cacert.pem`.
+
+## Test 2
+
+You receive this error from the product team:
+````agsl
+Sentry
+Illuminate\Queue\MaxAttemptsExceededException
+App\Jobs\Feedbacks\ExportFeedbacks has been attempted too many times or run too long. The job may have previously timed out.
+````
+
+Based on your understanding of Laravel Queues,
+1. Describe in your own words what this error means and the assumptions you can make.
+    This error means that the ExportFeedbacks job (supposedly exporting the feedback by email to the admin user at 3pm 
+    every Friday) either surpasses the maximum number of attempts allowed or runs for longer than expected. This job 
+    could be encountering issues during processing or could simply be taking longer than expected to execute. Perhaps 
+    it is accidentally entering an infinite loop or experiencing an error preventing it from completing successfully 
+    within the allowed attempts or time frame.
+    Assuming the ExportFeedbacks job is responsible for exporting the feedback by email to the admin user every Friday at 
+    3pm, perhaps it is failing to reach the email server and not throwing an error, or the feedback data is too large, 
+    causing the program to time-out, or the JSON file attached to the email is too large and the email-sending keeps 
+    failing, etc. There could be many reasons for this error which is why we would need to debug.
+2. What are your 3 actions or workflows you would suggest to solve the issue with your team?
+    The first action I would suggest to solve this issue would be to implement logging to see what part of the job is 
+    taking the longest, what the values and sizes are, etc. After reading the logs, perhaps we find that certain parts 
+    of the job could be optimized, ie. chunking large data sets, optimizing queries, etc. This first action includes 
+    examining the code to identify any inefficiencies or reasons for timeouts.
+
+    My second suggested action would be to improve exception handling to capture errors, log them, and respond accordingly.
+    We could also send alerts to Sentry to notify the team when a job fails multiple times or exceeds its allotted time.
+
+    Finally, I would suggest modifying the queue configuration for this job, increasing the maximum allowed attempts and 
+    time before timeout to allow a longer processing window.
