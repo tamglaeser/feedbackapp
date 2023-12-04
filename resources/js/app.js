@@ -7,11 +7,11 @@ import Review from "./components/Review.vue";
 import ManualImport from "./components/ManualImport.vue";
 import Register from "./components/Register.vue";
 import Home from "./components/Home.vue";
-/*import * as Sentry from "@sentry/vue";
+import * as Sentry from "@sentry/vue";
 
 Sentry.init({
     dsn: import.meta.env.VITE_SENTRY_DSN_PUBLIC,
-});*/
+});
 
 const router = createRouter({
     history: createWebHistory(),

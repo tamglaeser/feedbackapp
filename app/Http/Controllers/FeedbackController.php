@@ -6,6 +6,8 @@ use App\Models\Feedback;
 use App\Services\FileProcessingService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use function Sentry\captureException;
+use function Sentry\captureMessage;
 
 class FeedbackController extends Controller
 {
@@ -21,6 +23,7 @@ class FeedbackController extends Controller
             $data = Feedback::create($request->all());
             return response()->json(['status' => true, 'data' => $data], 201);
         } catch (\Exception $e) {
+            captureException($e);
             return response()->json(['error' => $e->getMessage()], 422);
         }
     }
@@ -43,6 +46,7 @@ class FeedbackController extends Controller
             }
             return response()->json(['message' => 'Feedbacks uploaded from file'], 200);
         } else {
+            captureMessage('No file uploaded');
             return response()->json(['error' => 'No file uploaded'], 400);
         }
     }

@@ -114,6 +114,10 @@ Using [Mailtrap](https://mailtrap.io/) as "dummy" mailbox to test my email sendi
 username, password, and other configurations to set up with your own Mailtrap account. Will then be able to see the sent
 emails in your Mailtrap inbox, including the To and From addresses, content, and attachments.
 
+## Sentry
+Using [Sentry](https://sentry.io/) to capture exceptions or messages as events. Replace `SENTRY_LARAVEL_DSN` (currently 
+set to `null`) in the `.env` file to your Sentry Laravel DNS to see the events on your Sentry account.
+
 ## CRON Jobs
 
 To set up CRON to call the Laravel command scheduler every minute, running the commands when scheduled, execute
@@ -136,6 +140,8 @@ php artisan export:feedback  # Export feedback as JSON and send it to admin user
 
 ### Certificate Authority
 
-To set up my certificate for my first CRON job, importing the Feedier CSV file, and avoid an SSL error, I had to go to my 
-[Feedier Production site](https://feedier-production.s3.eu-west-1.amazonaws.com/), download the certificate as a crt 
-file, and add the path for this certificate to my php.ini `openssl.cafile` variable.
+To set up my certificate for my first CRON job - importing the Feedier CSV file - and avoid an SSL error, I had to 
+download the latest cURL bundle of all the CAs (which includes the Amazon one), and add the path of this `cacert.pem`
+as my `php.ini` `openssl.cafile` variable. In case the Amazon CA were missing from this file, I could download the 
+certificate from the [Feedier Production Site](https://feedier-production.s3.eu-west-1.amazonaws.com/) and add the CA
+to the `cacert.pem`.

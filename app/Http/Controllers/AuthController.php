@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use function Sentry\captureMessage;
 
 class AuthController extends Controller
 {
@@ -65,6 +66,7 @@ class AuthController extends Controller
 
             return response()->json(['userId' => $user->getAuthIdentifier(), 'token' => $token]);
         } else {
+            captureMessage('Invalid credentials logging in');
             return response()->json(['message' => 'Invalid credentials'], 401);
         }
     }
