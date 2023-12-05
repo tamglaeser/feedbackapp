@@ -16,8 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::apiResource('feedback', FeedbackController::class);
 Route::post('/feedback/upload', [FeedbackController::class, 'uploadFromFile']);
+Route::delete('feedback/delete-all', [FeedbackController::class, 'deleteAll']);
+Route::apiResource('feedback', FeedbackController::class)->except(['destroy']);
 
 Route::apiResource('users', AuthController::class);
 Route::delete('/users/{id}', [AuthController::class, 'destroy']);

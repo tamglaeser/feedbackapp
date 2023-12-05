@@ -35,6 +35,12 @@ class FeedbackController extends Controller
         return response()->json(['status' => true, 'data' => $data], 201);
     }
 
+    public function deleteAll()
+    {
+        Feedback::truncate(); // Truncate deletes all records in the table
+        return response()->json(['message' => 'All feedbacks deleted'], 200);
+    }
+
     public function uploadFromFile(Request $request)
     {
         if ($request->hasFile('file')) {
